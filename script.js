@@ -1,8 +1,10 @@
 const TicTacToe = (function() {
+    
     // DOM
     const cells = document.querySelectorAll(".cell");
     const xButton = document.querySelector("#selectX");
     const oButton = document.querySelector("#selectO");
+    const difficulty = document.querySelector("#difficulty");
 
     // Game objects
     const Gameboard = {
@@ -10,8 +12,9 @@ const TicTacToe = (function() {
         listen: function() {
             cells.forEach((cell, i) => {
                 cell.addEventListener("click", () => {
-                    addSymbol(i);
-                    render();
+                    if (this.board[i] == "") {
+                        addSymbol(i);
+                    }
                 });
             });
         },
@@ -22,7 +25,7 @@ const TicTacToe = (function() {
     }
 
     const Player = {
-        symbol: "X",
+        symbol: "X", /////////////////////// set so if O computer goes first
         listen: function() {
             xButton.addEventListener("click", () => {
                 this.symbol = "X";
@@ -32,18 +35,35 @@ const TicTacToe = (function() {
                 this.symbol = "O";
                 Gameboard.reset();
             });
-        }
+        },
     }
     
-    const CPU = {
+    const Computer = {
         symbol: function() {
             if (Player.symbol == "X") {
                 return "O";
             } else return "X";
         },
-        setDifficulty: function() {
-
+        move: () => {
+            switch (difficulty) {
+                case easy:
+                    // Randomly fill one empty place
+                    break;
+                case moderate:
+                    // Alternate between random and expert
+                    break;
+                case draw:
+                    // Expert but choose only draw scenarios
+                    break;
+                case expert:
+                    // best possible moves
+                    break;
+                default:
+                    // copy code for easy
+                    break;
+            }
         },
+        
     }
 
     // Initialization
@@ -51,7 +71,6 @@ const TicTacToe = (function() {
 
     // Functions
     function start() {
-        render();
         Player.listen();
         Gameboard.listen();
     }
@@ -63,61 +82,68 @@ const TicTacToe = (function() {
         checkForWin();
     }
 
-    function addSymbol(i) {
+    function addSymbol(i) { // Make into player and computer methods?
         Gameboard.board.splice(i, 1, Player.symbol);
+        render();
     }
 
     function checkForWin() {
         if (Gameboard.board[0] == Gameboard.board[1] &&
             Gameboard.board[0] == Gameboard.board[2] &&
             Gameboard.board[0] != "") {
-                declareWinner();
+                declareWinner(0);
             } else
         if (Gameboard.board[3] == Gameboard.board[4] &&
             Gameboard.board[3] == Gameboard.board[5] &&
             Gameboard.board[3] != "") {
-                declareWinner();
+                declareWinner(3);
             } else
         if (Gameboard.board[6] == Gameboard.board[7] &&
             Gameboard.board[6] == Gameboard.board[8] &&
             Gameboard.board[6] != "") {
-                declareWinner();
+                declareWinner(6);
             } else
         if (Gameboard.board[0] == Gameboard.board[3] &&
             Gameboard.board[0] == Gameboard.board[6] &&
             Gameboard.board[0] != "") {
-                declareWinner();
+                declareWinner(0);
             } else
         if (Gameboard.board[1] == Gameboard.board[4] &&
             Gameboard.board[1] == Gameboard.board[7] &&
             Gameboard.board[1] != "") {
-                declareWinner();
+                declareWinner(1);
             } else
         if (Gameboard.board[2] == Gameboard.board[5] &&
             Gameboard.board[2] == Gameboard.board[8] &&
             Gameboard.board[2] != "") {
-                declareWinner();
+                declareWinner(2);
             } else
         if (Gameboard.board[0] == Gameboard.board[4] &&
             Gameboard.board[0] == Gameboard.board[8] &&
             Gameboard.board[0] != "") {
-                declareWinner();
+                declareWinner(0);
             } else
         if (Gameboard.board[2] == Gameboard.board[4] &&
             Gameboard.board[2] == Gameboard.board[6] &&
             Gameboard.board[2] != "") {
-                declareWinner();
+                declareWinner(2);
             } else
         if (!Gameboard.board.includes("")) {
-                declareTie();
+                declareWinner("tie");
             }
     }
 
-    function declareWinner() {
-        console.log("someone won!");
+    function declareWinner(i) {
+        if (i == "tie") {
+            console.log("it's a tie!");
+        }
+        if (Gameboard.board[i] == Player.symbol) {
+            console.log("You won!");
+        } else {
+            console.log("You lost...");
+        }
+        
     }
 
-    function declareTie() {
-        console.log("it's a tie!");
-    }
+    // Add dom methods to add results screen //////////////////////
 })();
