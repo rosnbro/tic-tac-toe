@@ -13,14 +13,21 @@ const TicTacToe = (function() {
             cells.forEach((cell, i) => {
                 cell.addEventListener("click", () => {
                     if (this.board[i] == "") {
-                        addSymbol(i);
+                        //addSymbol(i);
+                        Player.move(i);
                     }
                 });
             });
         },
+        render: function() {
+            cells.forEach((cell, i) => {
+                cell.innerHTML = this.board[i];
+            });
+            checkForWin();
+        },
         reset: function() {
             this.board = ["","","","","","","","",""];
-            render();
+            this.render();
         },
     }
 
@@ -36,6 +43,10 @@ const TicTacToe = (function() {
                 Gameboard.reset();
             });
         },
+        move: function(i) {
+            Gameboard.board.splice(i, 1, this.symbol);
+            Gameboard.render();
+        },
     }
     
     const Computer = {
@@ -44,10 +55,15 @@ const TicTacToe = (function() {
                 return "O";
             } else return "X";
         },
-        move: () => {
+        move: function() {
             switch (difficulty) {
                 case easy:
                     // Randomly fill one empty place
+                    Gameboard.board.forEach((space, i) => {
+                        if (space == "") {
+
+                        }
+                    });
                     break;
                 case moderate:
                     // Alternate between random and expert
@@ -75,17 +91,17 @@ const TicTacToe = (function() {
         Gameboard.listen();
     }
 
-    function render() {
+    /*function render() {
         cells.forEach((cell, i) => {
             cell.innerHTML = Gameboard.board[i];
         });
         checkForWin();
-    }
+    }*/
 
-    function addSymbol(i) { // Make into player and computer methods?
+    /*function addSymbol(i) { // Make into player and computer methods?
         Gameboard.board.splice(i, 1, Player.symbol);
-        render();
-    }
+        Gameboard.render();
+    }*/
 
     function checkForWin() {
         if (Gameboard.board[0] == Gameboard.board[1] &&
@@ -139,8 +155,12 @@ const TicTacToe = (function() {
         }
         if (Gameboard.board[i] == Player.symbol) {
             console.log("You won!");
+            // pass winner to results screen
+            // player win count +1
         } else {
             console.log("You lost...");
+            // pass winner to results screen
+            // computer win count +1
         }
         
     }
