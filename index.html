@@ -11,17 +11,28 @@
 <body>
     <div class="header">Tic-Tac-Toe</div>
     <div class="menu">
-        
-        <label for="difficulty">Computer Difficulty:</label>
-        <select name="difficulty" id="difficulty">
-            <option value="easy">Easy</option>
-            <option value="moderate">Moderate</option>
-            <option value="draw">Draws Only</option>
-            <option value="expert">You Can't Win</option>
-        </select>
-        <div class="selectSymbol">
-            <button id="selectX">X</button>
-            <button id="selectO">O</button>
+        <div class="scoreboard">
+            <div class="scoreText">Player</div>
+            <div id="playerScore">0</div>
+        </div>
+        <div class="options">
+            <label for="difficulty">Difficulty</label>
+            <select name="difficulty" id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="moderate">Moderate</option>
+                <option value="draw">Draws Only</option>
+                <option value="expert">You Can't Win</option>
+            </select>
+            <div class="selectionPrompt">Play as</div>
+            <div class="selectSymbol">
+                <button id="selectX" class="active">X</button>
+                <button id="selectO">O</button>
+            </div>
+            <button id="reset">Play Again</button>
+        </div>
+        <div class="scoreboard">
+            <div class="scoreText">Computer</div>
+            <div id="computerScore">0</div>
         </div>
     </div>
     <div class="board">

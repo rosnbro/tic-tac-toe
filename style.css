@@ -1,8 +1,26 @@
+:root {
+    font-family: 'Times New Roman', Times, serif;
+    --header-bg-color: #344057;
+    --body-bg-color: #d4cebe;
+    --menu-bg-color: #ce9e73;
+    --menu-highlight-color: white;
+    --menu-border-color: black;
+    --cell-bg-color: white;
+
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
+    text-align: center;
+    background-color: var(--body-bg-color);
+}
+
+button,
+select {
+    font-family: inherit;
 }
 
 .header {
@@ -10,20 +28,71 @@ body {
     padding: 2rem;
     font-size: 2rem;
     text-align: center;
-    background-color: indianred;
+    background-color: var(--header-bg-color);
     color: white;
 }
 
 .menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0px;
+    margin: 2rem;
+    padding: 2rem 0;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--menu-bg-color);
+}
+
+.scoreboard {
     display: flex;
     flex-direction: column;
-    height: 200px;
-    margin: 2rem;
-    background-color: darkseagreen;
+    justify-self: center;
+}
+
+.scoreText,
+.selectionPrompt,
+label {
+    font-size: 1.5rem;
+}
+
+#playerScore,
+#computerScore {
+    font-size: 2rem;
+}
+
+select {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    background-color: var(--menu-highlight-color);
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
 }
 
 .selectSymbol button {
     font-size: 2rem;
+    border: 2px solid var(--menu-border-color);
+    border-radius: 8px;
+    background-color: var(--menu-bg-color);
+}
+
+button.active {
+    background-color: var(--menu-highlight-color);
+}
+
+#reset {
+    margin-top: 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--menu-border-color);
+    border-radius: 8px;
+    background-color: var(--menu-bg-color);
+}
+
+#reset:hover {
+    background-color: var(--menu-highlight-color);
 }
 
 .board {
@@ -36,7 +105,10 @@ body {
 }
 
 .cell {
-    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     font-size: 3rem;
+    background-color: var(--cell-bg-color);
 }
