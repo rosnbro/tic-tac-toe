@@ -95,6 +95,13 @@ button.active {
     background-color: var(--menu-highlight-color);
 }
 
+.winner {
+    grid-column: 1 / 4;
+    margin: 1.5rem 0 0.25rem;
+    height: 2rem;
+    font-size: 1.5rem;
+}
+
 .board {
     display: grid;
     width: 500px;

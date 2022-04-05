@@ -6,12 +6,22 @@ const TicTacToe = (function() {
     const xButton = document.querySelector("#selectX");
     const oButton = document.querySelector("#selectO");
     const resetButton = document.querySelector("#reset");
+    const winner = document.querySelector(".winner");
     const playerScore = document.querySelector("#playerScore");
     const computerScore = document.querySelector("#computerScore");
+    
 
     // Game objects
     const Gameboard = {
         board: ["","","","","","","","",""],
+        fill: function() {
+            cells.forEach((cell, i) => {
+                if (cell.innerHTML == "") {
+                    this.board.splice(i, 1, "-");
+                }
+            });
+            this.render();
+        },
         listen: function() {
             cells.forEach((cell, i) => {
                 cell.addEventListener("click", () => {
@@ -28,7 +38,10 @@ const TicTacToe = (function() {
         },
         reset: function() {
             this.board = ["","","","","","","","",""];
-            this.render();
+            winner.innerHTML = "";
+            if (Player.symbol == "O") {
+                Computer.move();
+            } else this.render();
         },
     }
 
@@ -47,7 +60,6 @@ const TicTacToe = (function() {
                 this.symbol = "O";
                 Computer.symbol = "X"
                 Gameboard.reset();
-                Computer.move();
                 oButton.classList.add("active");
                 xButton.classList.remove("active");
             });
@@ -145,20 +157,24 @@ const TicTacToe = (function() {
         },
         declareWinner: function(i) {
             if (i == "tie") {
-                this.displayWinner("Nobody");
+                this.displayWinner("TIE");
             } else if (Gameboard.board[i] == Player.symbol) {
                 Player.wins++;
-                this.displayWinner("You");
+                this.displayWinner("PLAYER");
             } else {
                 Computer.wins++;
-                this.displayWinner("The Computer");
+                this.displayWinner("COMPUTER");
             }
         },
-        displayWinner: function(winner) {
-            alert(winner + " won this one!");
+        displayWinner: function(win) {
+            Gameboard.fill();
+            if (win == "TIE") {
+                winner.innerHTML = win;
+            } else {
+                winner.innerHTML = win + " WINS"
+            }
             playerScore.innerHTML = Player.wins;
             computerScore.innerHTML = Computer.wins;
-            // Gameboard.reset();
         },
     }
 
