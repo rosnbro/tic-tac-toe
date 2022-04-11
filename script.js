@@ -79,9 +79,6 @@ const TicTacToe = (function() {
         wins: 0,
         move: function() {
             switch (difficulty.value) {
-                case "moderate":
-                    // Alternate between random and expert
-                    break;
                 case "draw":
                     // Expert but choose only draw scenarios
                     break;
@@ -89,6 +86,7 @@ const TicTacToe = (function() {
                     // best possible moves
                     break;
                 default:
+                    // case easy - random moves
                     let isPlaced = false;
                     let i;
                     do {

@@ -1,0 +1,1 @@
+This is a simple javascript game of tic tac toe. The current computer opponent makes randomly generated moves.
